@@ -5,8 +5,21 @@ set -euo pipefail
 ### SCRIPT VARIABLES ###
 ########################
 
+# Name hostname
+echo Enter a host name for me: 
+read HOSTNAME
+hostnamectl set-hostname "${HOSTNAME}"
+
 # Name of the user to create and grant sudo privileges
-USERNAME=ubuntu
+echo Enter username to create: 
+read USERNAME
+
+# Name of the user to create and grant sudo privileges
+ip a
+echo Enter name of the interface you want Static: 
+read INTERFACE
+echo Enter static IP address: 
+read IPADDR
 
 # Whether to copy over the root user's `authorized_keys` file to the new sudo
 # user.
