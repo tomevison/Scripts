@@ -89,3 +89,11 @@ apt update && apt -y upgrade
 
 # install common programs
 apt -y install network-manager
+
+# docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh ./get-docker.sh
+groupadd docker
+usermod -aG docker "${USERNAME}"
+chown "${USERNAME}":"$${USERNAME}" /home/"$${USERNAME}"/.docker -R # set docker folder ownership to new user
+chmod g+rwx "$HOME/.docker" -R
