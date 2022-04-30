@@ -7,7 +7,6 @@ set -euo pipefail
 
 # Name hostname
 read -p "Enter my new hostname: " HOSTNAME
-hostnamectl set-hostname "${HOSTNAME}"
 
 # Name of the user to create and grant sudo privileges
 read -p "Enter username to create: " USERNAME
@@ -16,7 +15,6 @@ read -p "Enter username to create: " USERNAME
 ip a
 read -p "Enter name of the interface you want Static: " INTERFACE
 read -p "Enter static IP address: " IPADDR
-read -p "paste your SSH key: " SSHKEY
 
 # Whether to copy over the root user's `authorized_keys` file to the new sudo
 # user.
@@ -28,7 +26,7 @@ COPY_AUTHORIZED_KEYS_FROM_ROOT=true
 #     "ssh-rsa AAAAB..."
 # )
 OTHER_PUBLIC_KEYS_TO_ADD=(
-      "${SSHKEY}"
+
 )
 
 ####################
@@ -50,6 +48,13 @@ else
     # Delete invalid password for user if using keys so that a new password
     # can be set without providing a previous value
     passwd --delete "${USERNAME}"
+fi
+
+# Set the hostname and hosts file
+hostnamectl set-hostname "${HOSTNAME}"
+if [ "$IPADDR" != "" ] && [ "${HOSTNAME}" != "" ]; then
+      # Append the text by using '>>' symbol
+      echo "${IPADDR} ${HOSTNAME}" >> '/etc/hosts'
 fi
 
 # Expire the sudo user's password immediately to force a change
