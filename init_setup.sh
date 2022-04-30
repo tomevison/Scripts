@@ -28,7 +28,7 @@ COPY_AUTHORIZED_KEYS_FROM_ROOT=true
 #     "ssh-rsa AAAAB..."
 # )
 OTHER_PUBLIC_KEYS_TO_ADD=(
-${SSHKEY}
+      "${SSHKEY}"
 )
 
 ####################
