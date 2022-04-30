@@ -6,20 +6,17 @@ set -euo pipefail
 ########################
 
 # Name hostname
-echo Enter a host name for me: 
-read HOSTNAME
+read -p "Enter my new hostname: " HOSTNAME
 hostnamectl set-hostname "${HOSTNAME}"
 
 # Name of the user to create and grant sudo privileges
-echo Enter username to create: 
-read USERNAME
+read -p "Enter username to create: " USERNAME
 
 # Name of the user to create and grant sudo privileges
 ip a
-echo Enter name of the interface you want Static: 
-read INTERFACE
-echo Enter static IP address: 
-read IPADDR
+read -p "Enter name of the interface you want Static: " INTERFACE
+read -p "Enter static IP address: " IPADDR
+read -p "paste your SSH key: " SSHKEY
 
 # Whether to copy over the root user's `authorized_keys` file to the new sudo
 # user.
@@ -31,6 +28,7 @@ COPY_AUTHORIZED_KEYS_FROM_ROOT=true
 #     "ssh-rsa AAAAB..."
 # )
 OTHER_PUBLIC_KEYS_TO_ADD=(
+${SSHKEY}
 )
 
 ####################
