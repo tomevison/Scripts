@@ -72,3 +72,9 @@ fi
 # Add exception for SSH and then enable UFW firewall
 ufw allow OpenSSH
 ufw --force enable
+
+# update the device
+apt update && apt -y upgrade
+
+# install common programs
+apt -y install network-manager
