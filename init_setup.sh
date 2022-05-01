@@ -93,7 +93,8 @@ ufw --force enable
 apt update && apt -y upgrade
 
 # install common programs
-apt -y install network-manager
+apt -y install network-manager  # allows ip config
+apt -y install snmpd            # snmp for network monitoring
 
 # docker
 curl -fsSL https://get.docker.com -o get-docker.sh
