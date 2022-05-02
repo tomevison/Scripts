@@ -85,8 +85,9 @@ if sshd -t -q; then
     systemctl restart sshd
 fi
 
-# Add exception for SSH and then enable UFW firewall
-ufw allow OpenSSH
+# FIREWALL
+ufw allow OpenSSH comment 'SSH'
+ufw allow from 10.40.40.0/24 to any port 161 comment 'SNMP'
 ufw --force enable
 
 # update the device
